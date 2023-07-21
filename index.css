@@ -1,5 +1,5 @@
 body {
-    width: 1440px;
+    max-width: 1440px;
     margin-left: auto;
     margin-right: auto;
     font-family: 'Open Sans', sans-serif;
@@ -39,26 +39,38 @@ main {
     padding-top: 20px;
 }
 
+.grid> :nth-child(2n) {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: rgb(255, 255, 255);
+}
+
 .grid-header {
     display: flex;
     justify-content: space-between;
     border-bottom: 3px solid rgb(199, 0, 168);
+    padding: 0 5px;
+    position: sticky;
+    top: 0;
+    background-color: rgb(255, 255, 255);
 }
 
 .grid-header div {
     padding-bottom: 5px;
+    padding-top: 15px;
 }
 
 .grid-body {
     display: flex;
     justify-content: space-between;
-}
-
-.grid-body .item {
-    padding-right: 5px;
-    border-right: 1px solid rgb(0, 0, 0);
+    padding: 0 5px;
+    border-radius: 5px;
 }
 
 .grid-body div {
     padding: 5px 0;
+}
+
+.grid-body:hover {
+    box-shadow: 4px 4px 40px rgba(0, 0, 0, 0.7);
+    cursor: pointer;
 }
