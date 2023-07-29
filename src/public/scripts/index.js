@@ -1,3 +1,20 @@
+document.addEventListener('DOMContentLoaded', function () {
+    fetch('http://localhost:3000/getdata')
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Ошибка загрузки данных');
+            }
+        })
+        .then(data => {
+            console.log(data);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+});
+
 function AddNew() {
     const parentDiv = document.getElementsByClassName("grid")[0];
 
