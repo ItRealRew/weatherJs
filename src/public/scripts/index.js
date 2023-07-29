@@ -4,7 +4,7 @@ function AddNew() {
     const newEl = document.createElement("div");
 
     const DateDiv = document.createElement("div");
-    DateDiv.textContent = new Date();
+    DateDiv.textContent = "22:22";
 
     const PlaceDiv = document.createElement("div");
     PlaceDiv.textContent = "Владимир";
@@ -45,7 +45,8 @@ function AddNew() {
     newEl.appendChild(AuthorDiv);
 
     newEl.classList.add("grid-body");
-    newEl.classList.add("transition")
+    newEl.classList.add("transition");
+    newEl.classList.add("grid-rows");
 
     parentDiv.appendChild(newEl);
 }

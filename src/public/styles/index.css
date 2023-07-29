@@ -59,14 +59,19 @@ main {
     background-color: rgb(255, 255, 255);
 }
 
+.grid-rows {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    align-items: center;
+    column-gap: 5px;
+}
+
 .grid-header div {
     padding-bottom: 5px;
     padding-top: 15px;
 }
 
 .grid-body {
-    display: flex;
-    justify-content: space-between;
     padding: 0 5px;
     border-radius: 5px;
 }
