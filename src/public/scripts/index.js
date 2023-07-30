@@ -1,5 +1,7 @@
+const API_URL = "http://localhost:3000/api/";
+
 document.addEventListener('DOMContentLoaded', function () {
-    fetch('http://localhost:3000/getdata')
+    fetch(API_URL + 'getdata')
         .then(response => {
             if (response.ok) {
                 return response.json();
@@ -8,47 +10,50 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         })
         .then(data => {
-            console.log(data);
+            for (let i = 0; i < data.length; i++) {
+                newGridElement(data[i])
+            }
         })
         .catch(error => {
             console.error(error);
         });
 });
 
-function AddNew() {
+
+function newGridElement(weather) {
     const parentDiv = document.getElementsByClassName("grid")[0];
 
     const newEl = document.createElement("div");
 
     const DateDiv = document.createElement("div");
-    DateDiv.textContent = "22:22";
+    DateDiv.textContent = weather.Date;
 
     const PlaceDiv = document.createElement("div");
-    PlaceDiv.textContent = "Владимир";
+    PlaceDiv.textContent = weather.Place;
 
     const TemperatureDiv = document.createElement("div");
-    TemperatureDiv.textContent = "24 градусов";
+    TemperatureDiv.textContent = weather.Temperature;
 
     const CloudСoverDiv = document.createElement("div");
-    CloudСoverDiv.textContent = "Да";
+    CloudСoverDiv.textContent = weather.Cloud;
 
     const SunshineDiv = document.createElement("div");
-    SunshineDiv.textContent = "Да";
+    SunshineDiv.textContent = weather.Sunshine;
 
     const HumidityDiv = document.createElement("div");
-    HumidityDiv.textContent = "Да";
+    HumidityDiv.textContent = weather.Humidity;
 
     const WindDiv = document.createElement("div");
-    WindDiv.textContent = "Северный";
+    WindDiv.textContent = weather.Wind;
 
     const CycloneDiv = document.createElement("div");
-    CycloneDiv.textContent = "Нет";
+    CycloneDiv.textContent = weather.Cyclone;
 
     const AntiCycloneDiv = document.createElement("div");
-    AntiCycloneDiv.textContent = "Нет";
+    AntiCycloneDiv.textContent = weather.AntiCyclone;
 
     const AuthorDiv = document.createElement("div");
-    AuthorDiv.textContent = "ItRelRew";
+    AuthorDiv.textContent = weather.Author;
 
     newEl.appendChild(DateDiv);
     newEl.appendChild(PlaceDiv);
@@ -66,4 +71,42 @@ function AddNew() {
     newEl.classList.add("grid-rows");
 
     parentDiv.appendChild(newEl);
+}
+
+function AddNew() {
+    var weather = {
+        Date: getDataNow(),
+        Place: document.getElementById("place").value,
+        Temperature: parseInt(document.getElementById("temperature").value),
+        Cloud: document.getElementById("cloud").checked,
+        Sunshine: document.getElementById("sunshine").checked,
+        Humidity: parseInt(document.getElementById("humidity").value),
+        Wind: document.getElementById("wind").value,
+        Cyclone: document.getElementById("cyclone").checked,
+        AntiCyclone: document.getElementById("anticyclone").checked,
+        Author: document.getElementById("author").value,
+    }
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", API_URL + "create");
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                newGridElement(weather);
+            } else {
+                console.error(xhr.statusText);
+            }
+        }
+    };
+    xhr.send(JSON.stringify(weather));
+}
+
+function getDataNow() {
+    var dateNow = new Date();
+    dateNow = String(dateNow.getMonth() + 1).padStart(2, '0') +
+        '/' + String(dateNow.getDate()).padStart(2, '0') +
+        '/' + dateNow.getFullYear() +
+        ' ' + String(dateNow.getHours() + ':' + dateNow.getMinutes());
+    return dateNow.toString();
 }

@@ -1,10 +1,10 @@
 export default interface Weather {
-    Data: Date;
+    Date: string;
     Place: string;
     Temperature: number;
     Cloud: boolean;
     Sunshine: boolean;
-    Humidity: boolean;
+    Humidity: number;
     Wind: string;
     Cyclone: boolean;
     AntiCyclone: boolean;

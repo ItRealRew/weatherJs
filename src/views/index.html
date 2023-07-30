@@ -15,7 +15,7 @@
 <body>
   <header>
     <h1>WeatherJs</h1>
-    <a class="transition" href="#NOopenModal" onclick="AddNew()">Добавить</a>
+    <a class="transition" href="#Add">Добавить</a>
   </header>
 
   <main>
@@ -27,7 +27,7 @@
         <div>Облачность</div>
         <div>Солнечность</div>
         <div>Влажность</div>
-        <div>Направление ветра</div>
+        <div>Скорость ветра</div>
         <div>Циклон</div>
         <div>Антициклон</div>
         <div>Автор</div>
@@ -36,7 +36,7 @@
   </main>
 
 
-  <div id="openModal" class="modal">
+  <div id="Add" class="modal">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -44,7 +44,45 @@
           <a href="#close" title="Close" class="close">×</a>
         </div>
         <div class="modal-body">
-          <p>Содержимое модального окна...</p>
+          <div class="modal-form">
+            <div>
+              <p>Местоположение</p>
+              <input class="modal-input" id="place">
+            </div>
+            <div>
+              <p>Температура</p>
+              <input class="modal-input" id="temperature">
+            </div>
+            <div>
+              <p>Облачно</p>
+              <input type="checkbox" class="modal-checkbox" id="cloud">
+            </div>
+            <div>
+              <p>Солнечно</p>
+              <input type="checkbox" class="modal-checkbox" id="sunshine">
+            </div>
+            <div>
+              <p>Влажность</p>
+              <input class="modal-input" id="humidity">
+            </div>
+            <div>
+              <p>Скорость ветра</p>
+              <input class="modal-input" id="wind">
+            </div>
+            <div>
+              <p>Циклон</p>
+              <input type="checkbox" class="modal-checkbox" id="cyclone">
+            </div>
+            <div>
+              <p>Антициклон</p>
+              <input type="checkbox" class="modal-checkbox" id="anticyclone">
+            </div>
+            <div>
+              <p>Ваше имя</p>
+              <input class="modal-input" id="author">
+            </div>
+          </div>
+          <a href="#close" class="modal-btn transition" onclick="AddNew()">Сохранить</a>
         </div>
       </div>
     </div>

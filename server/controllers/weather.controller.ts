@@ -1,16 +1,25 @@
-import Weather from '../models/weather.model'
+import fs from 'fs';
+import path from 'path';
+
+import Weather from '../models/weather.model';
 
 export default class WeatherController {
     constructor() { }
 
-    public weathers: Weather[] = [];
-
     public getActual(): string {
-        const myObject = {
-            name: 'John',
-            age: 30,
-            city: 'New York'
-        };
-        return JSON.stringify(myObject);
+        const data = fs.readFileSync(path.join(__dirname, '../data/Weather.json'), 'utf8');
+        const weathers: Weather [] = JSON.parse(data);
+        return JSON.stringify(weathers);
     }
+
+    public createWeather(body: string) {
+        const weather: Weather = JSON.parse(JSON.stringify(body));
+
+        const data = fs.readFileSync(path.join(__dirname, '../data/Weather.json'), 'utf8');
+        const weathers: Weather [] = JSON.parse(data);
+
+        weathers.push(weather);
+
+        fs.writeFileSync(path.join(__dirname, '../data/Weather.json'), JSON.stringify(weathers))
+      }
 }
