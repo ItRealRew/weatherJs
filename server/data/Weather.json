@@ -1,1 +1,67 @@
-[{"Date":"07/30/2023 19:14","Place":"Владимир","Temperature":17,"Cloud":true,"Sunshine":false,"Humidity":67,"Wind":"12","Cyclone":true,"AntiCyclone":false,"Author":"ItRealRew"},{"Date":"07/30/2023 19:16","Place":"Суздаль","Temperature":16,"Cloud":true,"Sunshine":false,"Humidity":80,"Wind":"10","Cyclone":true,"AntiCyclone":false,"Author":"ItRealRew"},{"Date":"07/30/2023 19:18","Place":"Владимир","Temperature":17,"Cloud":true,"Sunshine":false,"Humidity":56,"Wind":"13","Cyclone":true,"AntiCyclone":false,"Author":"ItRealRew"},{"Date":"07/30/2023 19:24","Place":"Суздаль","Temperature":16,"Cloud":true,"Sunshine":false,"Humidity":67,"Wind":"9","Cyclone":true,"AntiCyclone":false,"Author":"ItRealRew"}]
+[{
+    "Date": "30/07/2023 19:14",
+    "Place": "Владимир",
+    "Temperature": 17,
+    "Cloud": true,
+    "Sunshine": false,
+    "Humidity": 67,
+    "Wind": "12",
+    "Cyclone": true,
+    "AntiCyclone": false,
+    "Author": "ItRealRew"
+}, {
+    "Date": "30/07/2023 19:16",
+    "Place": "Суздаль",
+    "Temperature": 16,
+    "Cloud": true,
+    "Sunshine": false,
+    "Humidity": 80,
+    "Wind": "10",
+    "Cyclone": true,
+    "AntiCyclone": false,
+    "Author": "ItRealRew"
+}, {
+    "Date": "30/07/2023 19:18",
+    "Place": "Владимир",
+    "Temperature": 17,
+    "Cloud": true,
+    "Sunshine": false,
+    "Humidity": 56,
+    "Wind": "13",
+    "Cyclone": true,
+    "AntiCyclone": false,
+    "Author": "ItRealRew"
+}, {
+    "Date": "30/07/2023 19:24",
+    "Place": "Суздаль",
+    "Temperature": 16,
+    "Cloud": true,
+    "Sunshine": false,
+    "Humidity": 67,
+    "Wind": "9",
+    "Cyclone": true,
+    "AntiCyclone": false,
+    "Author": "ItRealRew"
+}, {
+    "Date": "01/08/2023 20:42",
+    "Place": "Суздаль",
+    "Temperature": 19,
+    "Cloud": false,
+    "Sunshine": true,
+    "Humidity": 30,
+    "Wind": "3",
+    "Cyclone": false,
+    "AntiCyclone": true,
+    "Author": "ItRealRew"
+}, {
+    "Date": "01/08/2023 20:44",
+    "Place": "Суздаль",
+    "Temperature": 19,
+    "Cloud": false,
+    "Sunshine": true,
+    "Humidity": 34,
+    "Wind": "2",
+    "Cyclone": false,
+    "AntiCyclone": true,
+    "Author": "ItRealRew"
+}]

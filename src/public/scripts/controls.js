@@ -1,4 +1,8 @@
-function addControls() {
+export function addControls() {
+    AddSortedDate();
+}
+
+function AddSortedDate() {
     var dateSort = document.getElementsByClassName("sort-date")[0];
 
     var xhr = new XMLHttpRequest();

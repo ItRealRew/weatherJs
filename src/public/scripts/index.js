@@ -1,26 +1,32 @@
+import {
+    addControls
+} from './controls.js';
+import {
+    getData
+} from './requests.js';
+
 const API_URL = "http://localhost:3000/api/";
 const weathers = new Array();
 
 document.addEventListener('DOMContentLoaded', function () {
     addControls();
 
-    fetch(API_URL + 'getdata')
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                throw new Error('Ошибка загрузки данных');
-            }
-        })
-        .then(data => {
-            for (let i = 0; i < data.length; i++) {
-                newGridElement(data[i])
-                weathers.push(data[i]);
-            }
-        })
-        .catch(error => {
-            console.error(error);
-        });
+    getData().then(data => {
+        for (let i = 0; i < data.length; i++) {
+            newGridElement(data[i])
+            weathers.push(data[i]);
+        }
+    });
+});
+
+document.addEventListener('click', function (event) {
+    if (event.target.classList.contains('sort-date') || event.target.classList.contains('sortDate')) {
+        sortDate();
+    }
+
+    if (event.target.classList.contains('modal-btn')) {
+        AddNew();
+    }
 });
 
 
@@ -77,6 +83,13 @@ function newGridElement(weather) {
     parentDiv.appendChild(newEl);
 }
 
+function sortDate() {
+    const value = document.getElementsByClassName("sort-date")[0];
+
+    value.style.getPropertyValue("transform") ? value.style.transform = "" :
+        value.style.transform = "rotate(180deg)";
+}
+
 function AddNew() {
     var weather = {
         Date: getDataNow(),
@@ -108,24 +121,9 @@ function AddNew() {
 
 function getDataNow() {
     var dateNow = new Date();
-    dateNow = String(dateNow.getMonth() + 1).padStart(2, '0') +
-        '/' + String(dateNow.getDate()).padStart(2, '0') +
+    dateNow = String(dateNow.getDate()).padStart(2, '0') +
+        '/' + String(dateNow.getMonth() + 1).padStart(2, '0') +
         '/' + dateNow.getFullYear() +
         ' ' + String(dateNow.getHours() + ':' + dateNow.getMinutes());
     return dateNow.toString();
-}
-
-function addControls() {
-    var dateSort = document.getElementsByClassName("sort-date")[0];
-
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', '/assets/sort.svg');
-    xhr.send();
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            var svgContent = xhr.responseText;
-
-            dateSort.innerHTML = svgContent;
-        }
-    };
 }
