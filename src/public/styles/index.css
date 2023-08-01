@@ -71,6 +71,12 @@ main {
     padding-top: 15px;
 }
 
+.grid-header-controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
 .grid-body {
     padding: 0 5px;
     border-radius: 5px;
@@ -81,6 +87,7 @@ main {
 }
 
 .grid-body:hover {
-    box-shadow: 4px 4px 40px rgba(0, 0, 0, 0.7);
+    background: rgb(122, 0, 119);
+    color: rgb(255, 255, 255);
     cursor: pointer;
 }

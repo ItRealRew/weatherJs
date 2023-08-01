@@ -1,6 +1,9 @@
 const API_URL = "http://localhost:3000/api/";
+const weathers = new Array();
 
 document.addEventListener('DOMContentLoaded', function () {
+    addControls();
+
     fetch(API_URL + 'getdata')
         .then(response => {
             if (response.ok) {
@@ -12,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(data => {
             for (let i = 0; i < data.length; i++) {
                 newGridElement(data[i])
+                weathers.push(data[i]);
             }
         })
         .catch(error => {
@@ -109,4 +113,19 @@ function getDataNow() {
         '/' + dateNow.getFullYear() +
         ' ' + String(dateNow.getHours() + ':' + dateNow.getMinutes());
     return dateNow.toString();
+}
+
+function addControls() {
+    var dateSort = document.getElementsByClassName("sort-date")[0];
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/assets/sort.svg');
+    xhr.send();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var svgContent = xhr.responseText;
+
+            dateSort.innerHTML = svgContent;
+        }
+    };
 }
