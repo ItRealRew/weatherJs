@@ -1,12 +1,18 @@
-.sort-date {
+.sort-date,
+.sort-place,
+.sort-temp {
     width: 25px;
 }
 
-.sort-date svg {
+.sort-date svg,
+.sort-place svg,
+.sort-temp svg {
     fill: rgb(0, 0, 0);
 }
 
-.sort-date:hover svg {
+.sort-date:hover svg,
+.sort-place:hover svg,
+.sort-temp:hover svg {
     fill: rgb(122, 0, 119);
     cursor: pointer;
     transition: 0.5s;

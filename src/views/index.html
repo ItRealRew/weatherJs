@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="/styles/normalize.css">
   <link rel="stylesheet" href="/styles/modal.css">
   <link rel="stylesheet" href="/styles/controls.css">
+  <link rel="stylesheet" href="/styles/loader.css">
   <script type="module" src="/scripts/index.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 </head>
@@ -22,13 +23,28 @@
   <main>
     <div class="grid">
       <div class="grid-header grid-rows">
-        <div class="grid-header-controls">
+        <div class="grid-header-controls grid-date-sort">
           <div class="sort-date"></div>
-          <p>Дата</p>
+          <p class="grid-date-sort">Date</p>
         </div>
-        <div>Местоположение</div>
-        <div>Температура</div>
-        <div>Облачность</div>
+        <div>
+          <div class="grid-header-controls grid-place-sort">
+            <div class="sort-place"></div>
+            <p class="grid-place-sort">Place</p>
+          </div>
+        </div>
+        <div>
+          <div class="grid-header-controls grid-temp-sort">
+            <div class="sort-temp"></div>
+            <p class="grid-temp-sort">Temperature</p>
+          </div>
+        </div>
+        <div class="grid-header-filter">Cloud
+          <div class="grid-filter">
+            <div> Пункт 1</div>
+            <div> Пункт 2</div>
+          </div>
+        </div>
         <div>Солнечность</div>
         <div>Влажность</div>
         <div>Скорость ветра</div>

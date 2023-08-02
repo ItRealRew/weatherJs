@@ -1,9 +1,22 @@
 import {
-    addControls
+    addControls,
+    changeDateControls,
+    changePlaceControls,
+    changeTempControls,
+    addLoader,
+    clearGrid
 } from './controls.js';
 import {
     getData
 } from './requests.js';
+import {
+    sortedDateAsc,
+    sortedDateDes,
+    sortedPlaceAsc,
+    sortedPlaceDes,
+    sortedTempAsc,
+    sortedTempDes
+} from './utils/sorting.js'
 
 const API_URL = "http://localhost:3000/api/";
 const weathers = new Array();
@@ -20,15 +33,28 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 document.addEventListener('click', function (event) {
-    if (event.target.classList.contains('sort-date') || event.target.classList.contains('sortDate')) {
+    if (event.target.classList.contains('sort-date') ||
+        event.target.classList.contains('sortDate') ||
+        event.target.classList.contains('grid-date-sort')) {
         sortDate();
+    }
+
+    if (event.target.classList.contains('sort-place') ||
+        event.target.classList.contains('sortPlace') ||
+        event.target.classList.contains('grid-place-sort')) {
+        sortPlace();
+    }
+
+    if (event.target.classList.contains('sort-temp') ||
+        event.target.classList.contains('sortTemp') ||
+        event.target.classList.contains('grid-temp-sort')) {
+        sortTemp();
     }
 
     if (event.target.classList.contains('modal-btn')) {
         AddNew();
     }
 });
-
 
 function newGridElement(weather) {
     const parentDiv = document.getElementsByClassName("grid")[0];
@@ -84,10 +110,51 @@ function newGridElement(weather) {
 }
 
 function sortDate() {
-    const value = document.getElementsByClassName("sort-date")[0];
+    clearGrid();
+    addLoader();
 
-    value.style.getPropertyValue("transform") ? value.style.transform = "" :
-        value.style.transform = "rotate(180deg)";
+    var sorted;
+
+    changeDateControls() ?
+        sorted = sortedDateAsc(weathers) :
+        sorted = sortedDateDes(weathers);
+
+    clearGrid();
+    for (let i = 0; i < sorted.length; i++) {
+        newGridElement(sorted[i]);
+    }
+}
+
+function sortPlace() {
+    clearGrid();
+    addLoader();
+
+    var sorted;
+
+    changePlaceControls() ?
+        sorted = sortedPlaceDes(weathers) :
+        sorted = sortedPlaceAsc(weathers);
+
+    clearGrid();
+    for (let i = 0; i < sorted.length; i++) {
+        newGridElement(sorted[i]);
+    }
+}
+
+function sortTemp() {
+    clearGrid();
+    addLoader();
+
+    var sorted;
+
+    changeTempControls() ?
+        sorted = sortedTempDes(weathers) :
+        sorted = sortedTempAsc(weathers);
+
+    clearGrid();
+    for (let i = 0; i < sorted.length; i++) {
+        newGridElement(sorted[i]);
+    }
 }
 
 function AddNew() {
@@ -111,6 +178,7 @@ function AddNew() {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
                 newGridElement(weather);
+                weathers.push(weather);
             } else {
                 console.error(xhr.statusText);
             }

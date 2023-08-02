@@ -66,11 +66,6 @@ main {
     column-gap: 5px;
 }
 
-.grid-header div {
-    padding-bottom: 5px;
-    padding-top: 15px;
-}
-
 .grid-header-controls {
     display: flex;
     gap: 10px;
@@ -90,4 +85,29 @@ main {
     background: rgb(122, 0, 119);
     color: rgb(255, 255, 255);
     cursor: pointer;
+}
+
+.grid-date-sort,
+.grid-place-sort,
+.grid-temp-sort {
+    cursor: pointer;
+}
+
+
+.grid-header-filter {
+    position: relative;
+}
+
+.grid-filter {
+    display: none;
+    position: absolute;
+    display: flex;
+    top: 25px;
+    left: -5px;
+    gap: 10px;
+    background: #4c4c4c;
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+    flex-direction: column;
 }
