@@ -98,16 +98,36 @@ main {
     position: relative;
 }
 
+.grid-header-filter:hover>.grid-filter,
+.grid-filter:hover {
+    visibility: visible;
+    cursor: pointer;
+}
+
 .grid-filter {
-    display: none;
     position: absolute;
     display: flex;
-    top: 25px;
     left: -5px;
     gap: 10px;
-    background: #4c4c4c;
-    padding: 10px;
+    background: rgb(76, 76, 76);
+    padding: 10px 0;
     border-radius: 10px;
-    color: white;
+    color: rgb(255, 255, 255);
     flex-direction: column;
+    visibility: hidden;
+}
+
+.grid-filter>div {
+    padding: 0 10px;
+    border-radius: 10px;
+}
+
+.grid-filter>div:hover {
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+}
+
+.grid-filter>div:active {
+    background-color: rgb(199, 0, 168);
+    color: rgb(255, 255, 255);
 }
