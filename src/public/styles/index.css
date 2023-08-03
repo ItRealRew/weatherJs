@@ -131,3 +131,41 @@ main {
     background-color: rgb(199, 0, 168);
     color: rgb(255, 255, 255);
 }
+
+.grid-filter-list {
+    position: absolute;
+    top: 50px;
+    left: -150px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-top: 3px solid rgb(199, 0, 168);
+    padding-top: 5px;
+}
+
+.grid-filter-item {
+    padding: 10px 30px;
+    background-color: rgb(76, 76, 76);
+    color: rgb(255, 255, 255);
+    border-radius: 15px;
+    max-width: 80px;
+    text-align: center;
+}
+
+.grid-filter-reset {
+    cursor: pointer;
+    border-radius: 15px;
+    padding: 10px 20px;
+    box-shadow: 4px 4px 40px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.grid-total {
+    position: absolute;
+    top: 0px;
+    left: -150px;
+    cursor: pointer;
+    border-radius: 15px;
+    padding: 15px 20px;
+    text-align: center;
+}
