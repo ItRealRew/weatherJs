@@ -1,9 +1,9 @@
 export function sortedDateDes(weathers) {
-    return weathers.sort((x, y) => x.Date.localeCompare(y.Date));
+    return weathers.sort((x, y) => parseDate(y.Date) - parseDate(x.Date));
 }
 
 export function sortedDateAsc(weathers) {
-    return weathers.sort((x, y) => y.Date.localeCompare(x.Date));
+    return weathers.sort((x, y) => parseDate(x.Date) - parseDate(y.Date));
 }
 
 export function sortedPlaceDes(weathers) {
@@ -40,4 +40,17 @@ export function sortedTempAsc(weathers) {
 
         return 0;
     });
+}
+
+function parseDate(date) {
+    const dateParts = date.split(/[\/ :]/);
+
+    const trueDate = new Date();
+    trueDate.setDate(dateParts[0]);
+    trueDate.setMonth(dateParts[1]);
+    trueDate.setFullYear(dateParts[2]);
+    trueDate.setHours(dateParts[3]);
+    trueDate.setMinutes(dateParts[4]);
+
+    return trueDate;
 }

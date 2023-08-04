@@ -90,12 +90,15 @@ export function addListFilter(filterList) {
     const filter = document.createElement("div");
     filter.classList.add('grid-filter-list');
 
-    const itemFilter = document.createElement("div")
-    itemFilter.classList.add('grid-filter-item');
-    itemFilter.textContent = filterList[0].Lable;
-
     filter.appendChild(addResetFilter());
-    filter.appendChild(itemFilter);
+
+    for (let i = 0; i < filterList.length; i++) {
+        const itemFilter = document.createElement("div")
+        itemFilter.classList.add('grid-filter-item');
+        itemFilter.textContent = filterList[i].Lable;
+        filter.appendChild(itemFilter);
+    }
+
     gridFilter.appendChild(filter);
 }
 

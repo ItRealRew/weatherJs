@@ -34,18 +34,29 @@ import {
 
 const weathers = new Array();
 
-let filteredWeathers = new Array();
-let filter = new Array();
+var filteredWeathers = new Array();
+var displayArr = new Array();
+
+var filter = new Array();
+
+const pageSize = 2;
+const currentPage = 1;
+
 
 document.addEventListener('DOMContentLoaded', async function () {
     addControls();
 
     await getData().then(data => {
         for (let i = 0; i < data.length; i++) {
-            newGridElement(data[i])
-            weathers.push(data[i]);
+            weathers.push(data[i])
         }
+
+         displayArr = weathers.slice((currentPage - 1) * pageSize, currentPage * pageSize);
     });
+
+    for (let i = 0; i < displayArr.length; i++) {
+        newGridElement(displayArr[i]);
+    }
 
     addTotals(weathers.length);
 });
@@ -237,7 +248,9 @@ function filterByNotSunny() {
 function resetFilter() {
     clearGrid();
     addLoader();
-    filteredWeathers.splice(0, filteredWeathers.length);
+
+    filteredWeathers = new Array();
+    filter = new Array();
 
     filterDestroy();
 
