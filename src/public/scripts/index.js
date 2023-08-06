@@ -40,7 +40,7 @@ var displayArr = new Array();
 var filter = new Array();
 
 const pageSize = 2;
-const currentPage = 1;
+var currentPage = 1;
 
 
 document.addEventListener('DOMContentLoaded', async function () {
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             weathers.push(data[i])
         }
 
-         displayArr = weathers.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+        displayArr = weathers.slice((currentPage - 1) * pageSize, currentPage * pageSize);
     });
 
     for (let i = 0; i < displayArr.length; i++) {
@@ -120,9 +120,7 @@ function sortDate() {
         sorted = sortedDateDes(getWeathers());
 
     clearGrid();
-    for (let i = 0; i < sorted.length; i++) {
-        newGridElement(sorted[i]);
-    }
+    displayDate(sorted);
 }
 
 function sortPlace() {
@@ -136,9 +134,7 @@ function sortPlace() {
         sorted = sortedPlaceAsc(getWeathers());
 
     clearGrid();
-    for (let i = 0; i < sorted.length; i++) {
-        newGridElement(sorted[i]);
-    }
+    displayDate(sorted);
 }
 
 function sortTemp() {
@@ -152,9 +148,7 @@ function sortTemp() {
         sorted = sortedTempAsc(getWeathers());
 
     clearGrid();
-    for (let i = 0; i < sorted.length; i++) {
-        newGridElement(sorted[i]);
-    }
+    displayDate(sorted);
 }
 
 function filterByClody() {
@@ -164,10 +158,8 @@ function filterByClody() {
     filteredWeathers = filtedByClody(getWeathers());
 
     clearGrid();
-    for (let i = 0; i < filteredWeathers.length; i++) {
-        newGridElement(filteredWeathers[i]);
-    }
-
+    displayDate(filteredWeathers);
+    
     addTotals(filteredWeathers.length);
 
     var clodyFilter = {
@@ -186,9 +178,7 @@ function filterByNotClody() {
     filteredWeathers = filtedByNotClody(getWeathers());
 
     clearGrid();
-    for (let i = 0; i < filteredWeathers.length; i++) {
-        newGridElement(filteredWeathers[i]);
-    }
+    displayDate(filteredWeathers);
 
     addTotals(filteredWeathers.length);
 
@@ -208,9 +198,7 @@ function filterBySunny() {
     filteredWeathers = filtedBySunny(getWeathers());
 
     clearGrid();
-    for (let i = 0; i < filteredWeathers.length; i++) {
-        newGridElement(filteredWeathers[i]);
-    }
+    displayDate(filteredWeathers);
 
     addTotals(filteredWeathers.length);
 
@@ -230,9 +218,7 @@ function filterByNotSunny() {
     filteredWeathers = filtedByNotSunny(getWeathers());
 
     clearGrid();
-    for (let i = 0; i < filteredWeathers.length; i++) {
-        newGridElement(filteredWeathers[i]);
-    }
+    displayDate(filteredWeathers);
 
     addTotals(filteredWeathers.length);
 
@@ -255,11 +241,17 @@ function resetFilter() {
     filterDestroy();
 
     clearGrid();
-    for (let i = 0; i < weathers.length; i++) {
-        newGridElement(weathers[i]);
-    }
+    displayDate(weathers);
 
     addTotals(weathers.length);
+}
+
+function displayDate(gridList) {
+    displayArr = gridList.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+
+    for (let i = 0; i < displayArr.length; i++) {
+        newGridElement(displayArr[i]);
+    }
 }
 
 function addNew() {
