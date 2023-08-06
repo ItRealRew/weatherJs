@@ -8,7 +8,10 @@ import {
     clearGrid,
     addTotals,
     addListFilter,
-    filterDestroy
+    filterDestroy,
+    notResuilt,
+    addPagination,
+    paginationDestroy
 } from './controls.js';
 
 import {
@@ -58,6 +61,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         newGridElement(displayArr[i]);
     }
 
+    addPagination(Math.ceil(weathers.length / pageSize), currentPage);
     addTotals(weathers.length);
 });
 
@@ -247,11 +251,20 @@ function resetFilter() {
 }
 
 function displayDate(gridList) {
+    paginationDestroy();
+
+    if ( gridList.length === 0) {
+        notResuilt();
+        return
+    }
+
     displayArr = gridList.slice((currentPage - 1) * pageSize, currentPage * pageSize);
 
     for (let i = 0; i < displayArr.length; i++) {
         newGridElement(displayArr[i]);
     }
+
+    addPagination(Math.ceil(gridList.length / pageSize), currentPage);
 }
 
 function addNew() {

@@ -82,6 +82,22 @@ export function addTotals(length) {
     gridHeader.appendChild(total);
 }
 
+export function addPagination(numPages, currentPage) {
+    if (numPages === 1) {
+        return
+    }
+
+    var container = document.getElementsByClassName("pagination")[0];
+
+    for (let i = 1; i < numPages + 1; i++) {
+        const item = document.createElement("div");
+        currentPage === i ? item.classList.add("pagination-active") : item.classList.add("pagination-elem");
+        item.textContent = i;
+
+        container.appendChild(item);
+    }
+}
+
 export function addListFilter(filterList) {
     filterDestroy();
 
@@ -107,6 +123,15 @@ function addResetFilter() {
     itemFilter.classList.add('grid-filter-reset');
     itemFilter.textContent = "Сбросить";
     return itemFilter;
+}
+
+export function paginationDestroy() {
+    var pagination = document.getElementsByClassName("pagination")[0];
+
+    const childElements = pagination.querySelectorAll('div > *');
+    childElements.forEach(element => {
+        element.remove();
+    });
 }
 
 export function filterDestroy() {
@@ -201,4 +226,14 @@ function addSortedButtonTemp() {
             dateSort.innerHTML = svgContent;
         }
     };
+}
+
+export function notResuilt() {
+    const grid = document.getElementsByClassName("grid")[0];
+
+    const result = document.createElement("div");
+    result.classList.add("grid-not-result");
+    result.textContent = "Результатов нет";
+
+    grid.appendChild(result);
 }

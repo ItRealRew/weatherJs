@@ -168,3 +168,9 @@ main {
     padding: 15px 20px;
     text-align: center;
 }
+
+.grid-not-result {
+    text-align: center;
+    border-radius: 20px;
+    padding: 20px;
+}
