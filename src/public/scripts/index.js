@@ -163,16 +163,10 @@ function filterByClody() {
 
     clearGrid();
     displayDate(filteredWeathers);
-    
+
     addTotals(filteredWeathers.length);
 
-    var clodyFilter = {
-        Name: "Clody",
-        Lable: "Облачно"
-    }
-
-    filter.push(clodyFilter);
-    addListFilter(filter);
+    toListFilter("Clody", "Облачно");
 }
 
 function filterByNotClody() {
@@ -186,13 +180,7 @@ function filterByNotClody() {
 
     addTotals(filteredWeathers.length);
 
-    var NotClodyFilter = {
-        Name: "NoClody",
-        Lable: "Не облачно"
-    }
-
-    filter.push(NotClodyFilter);
-    addListFilter(filter);
+    toListFilter("NoClody", "Не облачно");
 }
 
 function filterBySunny() {
@@ -206,13 +194,7 @@ function filterBySunny() {
 
     addTotals(filteredWeathers.length);
 
-    var sunnyFilter = {
-        Name: "Sunny",
-        Lable: "Солнечно"
-    }
-
-    filter.push(sunnyFilter);
-    addListFilter(filter);
+    toListFilter("Sunny", "Солнечно");
 }
 
 function filterByNotSunny() {
@@ -226,13 +208,7 @@ function filterByNotSunny() {
 
     addTotals(filteredWeathers.length);
 
-    var notSunnyFilter = {
-        Name: "NotSunny",
-        Lable: "Пасмурдно"
-    }
-
-    filter.push(notSunnyFilter);
-    addListFilter(filter);
+    toListFilter("NotSunny", "Пасмурдно");
 }
 
 function resetFilter() {
@@ -253,7 +229,7 @@ function resetFilter() {
 function displayDate(gridList) {
     paginationDestroy();
 
-    if ( gridList.length === 0) {
+    if (gridList.length === 0) {
         notResuilt();
         return
     }
@@ -265,6 +241,16 @@ function displayDate(gridList) {
     }
 
     addPagination(Math.ceil(gridList.length / pageSize), currentPage);
+}
+
+function toListFilter(nameFilter, LableFilter) {
+    const elemFilter = {
+        Name: nameFilter,
+        Lable: LableFilter
+    }
+
+    filter.some(item => item.Name === elemFilter.Name && item.Lable === elemFilter.Lable) ?
+        false : (filter.push(elemFilter), addListFilter(filter));
 }
 
 function addNew() {
