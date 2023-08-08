@@ -91,7 +91,7 @@ export function addPagination(numPages, currentPage) {
 
     for (let i = 1; i < numPages + 1; i++) {
         const item = document.createElement("div");
-        currentPage === i ? item.classList.add("pagination-active") : item.classList.add("pagination-elem");
+        currentPage === i ? item.classList.add("pagination-active") : (item.classList.add("pagination-elem"), item.classList.add("transition"));
         item.textContent = i;
 
         container.appendChild(item);
@@ -121,6 +121,7 @@ export function addListFilter(filterList) {
 function addResetFilter() {
     const itemFilter = document.createElement("div")
     itemFilter.classList.add('grid-filter-reset');
+    itemFilter.classList.add('transition');
     itemFilter.textContent = "Сбросить";
     return itemFilter;
 }

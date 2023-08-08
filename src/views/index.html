@@ -25,30 +25,40 @@
       <div class="grid-header grid-rows">
         <div class="grid-header-controls grid-date-sort">
           <div class="sort-date"></div>
-          <p class="grid-date-sort">Date</p>
+          <p class="grid-date-sort">Дата</p>
         </div>
         <div>
           <div class="grid-header-controls grid-place-sort">
             <div class="sort-place"></div>
-            <p class="grid-place-sort">Place</p>
+            <p class="grid-place-sort">Город</p>
           </div>
         </div>
         <div>
           <div class="grid-header-controls grid-temp-sort">
             <div class="sort-temp"></div>
-            <p class="grid-temp-sort">Temperature</p>
+            <div class="grid-temp-sort grid-header-filter">Градусы
+              <div class="grid-filter">
+                <div>
+                  <div>Min</div>
+                  <div>Max</div>
+                </div>
+                <div><input type="range" min="0" max="100" value="50" class="slider" id="myRange"></div>
+                <div><input type="range" min="0" max="100" value="50" class="slider" id="myRange"></div>
+                <div id="TempFilter" class="grid-filter-elem" style="text-align: center;">Применить</div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="grid-header-filter">Cloud
           <div class="grid-filter">
-            <div id="Clody">Сloudy</div>
-            <div id="NotClody">Not cloudy</div>
+            <div id="Clody" class="grid-filter-elem">Облачно</div>
+            <div id="NotClody" class="grid-filter-elem">Не облачно</div>
           </div>
         </div>
         <div class="grid-header-filter">Sunny
           <div class="grid-filter">
-            <div id="Sunny">Sunny</div>
-            <div id="NotSunny">Not sunny</div>
+            <div id="Sunny" class="grid-filter-elem">Солнечно</div>
+            <div id="NotSunny" class="grid-filter-elem">Пасмурдно</div>
           </div>
         </div>
         <div>Влажность</div>
@@ -114,4 +124,5 @@
     </div>
   </div>
 </body>
+
 </html>

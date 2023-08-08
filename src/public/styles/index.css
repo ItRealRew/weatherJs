@@ -106,6 +106,7 @@ main {
 
 .grid-filter {
     position: absolute;
+    width: max-content;
     display: flex;
     left: -5px;
     gap: 10px;
@@ -122,12 +123,12 @@ main {
     border-radius: 10px;
 }
 
-.grid-filter>div:hover {
+.grid-filter>.grid-filter-elem:hover {
     background-color: rgb(255, 255, 255);
     color: rgb(0, 0, 0);
 }
 
-.grid-filter>div:active {
+.grid-filter>.grid-filter-elem:active {
     background-color: rgb(199, 0, 168);
     color: rgb(255, 255, 255);
 }
@@ -158,6 +159,12 @@ main {
     padding: 10px 20px;
     box-shadow: 4px 4px 40px rgba(0, 0, 0, 0.3);
     text-align: center;
+}
+
+.grid-filter-reset:hover {
+    background-color: rgb(199, 0, 168);
+    color: rgb(255, 255, 255);
+    border-radius: 10px;
 }
 
 .grid-total {

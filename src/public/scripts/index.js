@@ -107,6 +107,17 @@ document.addEventListener('click', function (event) {
     if (event.target.classList.contains('modal-btn')) {
         addNew();
     }
+
+    const pagination = document.querySelector('.pagination');
+    const paginationElems = pagination.querySelectorAll('.pagination-elem');
+
+    for (let i = 0; i < paginationElems.length; i++) {
+        if (event.target === paginationElems[i]) {
+            currentPage = parseInt(paginationElems[i].textContent);
+            clearGrid();
+            displayDate(getWeathers());
+        }
+    }
 });
 
 function getWeathers() {
@@ -159,6 +170,7 @@ function filterByClody() {
     clearGrid();
     addLoader();
 
+    currentPage = 1;
     filteredWeathers = filtedByClody(getWeathers());
 
     clearGrid();
@@ -173,6 +185,7 @@ function filterByNotClody() {
     clearGrid();
     addLoader();
 
+    currentPage = 1;
     filteredWeathers = filtedByNotClody(getWeathers());
 
     clearGrid();
@@ -187,6 +200,7 @@ function filterBySunny() {
     clearGrid();
     addLoader();
 
+    currentPage = 1;
     filteredWeathers = filtedBySunny(getWeathers());
 
     clearGrid();
@@ -201,6 +215,7 @@ function filterByNotSunny() {
     clearGrid();
     addLoader();
 
+    currentPage = 1;
     filteredWeathers = filtedByNotSunny(getWeathers());
 
     clearGrid();
