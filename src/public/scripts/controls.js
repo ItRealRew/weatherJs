@@ -238,3 +238,41 @@ export function notResuilt() {
 
     grid.appendChild(result);
 }
+
+export function initialTemp(min, max) {
+    changeTempMax(max);
+    changeTempMin(min);
+
+    const maxContainer = document.getElementsByClassName("tempInputMax")[0];
+    const minContainer = document.getElementsByClassName("tempInputMin")[0];
+
+    const maxInput = document.createElement("input");
+    maxInput.setAttribute("type", "range");
+    maxInput.setAttribute("min", min);
+    maxInput.setAttribute("max", max);
+    maxInput.setAttribute("class", "slider");
+    maxInput.setAttribute("id", "tempMax");
+    maxInput.setAttribute("value", max);
+    
+
+    const minInput = document.createElement("input");
+    minInput.setAttribute("type", "range");
+    minInput.setAttribute("min", min);
+    minInput.setAttribute("max", max);
+    minInput.setAttribute("class", "slider");
+    minInput.setAttribute("id", "tempMin");
+    minInput.setAttribute("value", min);
+
+    maxContainer.appendChild(maxInput);
+    minContainer.appendChild(minInput);
+}
+
+export function changeTempMax(value) {
+    const result = document.getElementById("tempMaxResult");
+    result.textContent = value;
+}
+
+export function changeTempMin(value) {
+    const result = document.getElementById("tempMinResult");
+    result.textContent = value;
+}

@@ -11,7 +11,10 @@ import {
     filterDestroy,
     notResuilt,
     addPagination,
-    paginationDestroy
+    paginationDestroy,
+    changeTempMax,
+    changeTempMin,
+    initialTemp
 } from './controls.js';
 
 import {
@@ -32,7 +35,8 @@ import {
     filtedByClody,
     filtedByNotClody,
     filtedBySunny,
-    filtedByNotSunny
+    filtedByNotSunny,
+    filtedByTemp
 } from './utils/filtering.js';
 
 const weathers = new Array();
@@ -63,6 +67,16 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     addPagination(Math.ceil(weathers.length / pageSize), currentPage);
     addTotals(weathers.length);
+
+    const minTemp = weathers.reduce((min, weather) => {
+        return Math.min(min, weather.Temperature);
+    }, weathers[0].Temperature);
+
+    const maxAge = weathers.reduce((max, weather) => {
+        return Math.max(max, weather.Temperature);
+    }, weathers[0].Temperature);
+
+    initialTemp(minTemp, maxAge);
 });
 
 document.addEventListener('click', function (event) {
@@ -100,6 +114,10 @@ document.addEventListener('click', function (event) {
         filterByNotSunny();
     }
 
+    if (event.target.id === "TempFilter") {
+        filterByTemp();
+    }
+
     if (event.target.classList.contains('grid-filter-reset')) {
         resetFilter();
     }
@@ -117,6 +135,16 @@ document.addEventListener('click', function (event) {
             clearGrid();
             displayDate(getWeathers());
         }
+    }
+});
+
+document.addEventListener('input', function (event) {
+    if (event.target.id === "tempMax") {
+        changeTempMax(event.target.value);
+    }
+
+    if (event.target.id === "tempMin") {
+        changeTempMin(event.target.value);
     }
 });
 
@@ -224,6 +252,29 @@ function filterByNotSunny() {
     addTotals(filteredWeathers.length);
 
     toListFilter("NotSunny", "Пасмурдно");
+}
+
+function filterByTemp() {
+    clearGrid();
+    addLoader();
+
+    currentPage = 1;
+    filteredWeathers = filtedByTemp(getWeathers(), getMinTemp(), getMaxTemp());
+
+    clearGrid();
+    displayDate(filteredWeathers);
+
+    addTotals(filteredWeathers.length);
+
+    toListFilter("Temp", "Температура От " + getMinTemp() + ", До " + getMaxTemp());
+}
+
+function getMaxTemp() {
+    return document.getElementById("tempMaxResult").textContent;
+}
+
+function getMinTemp() {
+    return document.getElementById("tempMinResult").textContent;
 }
 
 function resetFilter() {

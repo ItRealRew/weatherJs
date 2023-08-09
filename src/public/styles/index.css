@@ -181,3 +181,9 @@ main {
     border-radius: 20px;
     padding: 20px;
 }
+
+.grid-filter-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}

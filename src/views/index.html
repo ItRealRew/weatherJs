@@ -39,11 +39,17 @@
             <div class="grid-temp-sort grid-header-filter">Градусы
               <div class="grid-filter">
                 <div>
-                  <div>Min</div>
-                  <div>Max</div>
+                  <div class="grid-filter-row">
+                    <div>Max:</div>
+                    <div id="tempMaxResult"></div>
+                  </div>
+                  <div class="grid-filter-row">
+                    <div>Min:</div>
+                    <div id="tempMinResult"></div>
+                  </div>
                 </div>
-                <div><input type="range" min="0" max="100" value="50" class="slider" id="myRange"></div>
-                <div><input type="range" min="0" max="100" value="50" class="slider" id="myRange"></div>
+                <div class="tempInputMax"></div>
+                <div class="tempInputMin"></div>
                 <div id="TempFilter" class="grid-filter-elem" style="text-align: center;">Применить</div>
               </div>
             </div>
