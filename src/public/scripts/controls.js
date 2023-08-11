@@ -2,6 +2,7 @@ export function addControls() {
     addSortedButtonDate();
     addSortedButtonPlace();
     addSortedButtonTemp();
+    addSortedButtonHum();
 }
 
 export function newGridElement(weather) {
@@ -186,6 +187,16 @@ export function changeTempControls() {
     return result;
 }
 
+export function changeHumControls() {
+    const value = document.getElementsByClassName("sort-hum")[0];
+
+    let result;
+
+    value.style.getPropertyValue("transform") ? (value.style.transform = "", result = true) :
+        (value.style.transform = "rotate(180deg)", result = false);
+    return result;
+}
+
 
 function addSortedButtonDate() {
     var dateSort = document.getElementsByClassName("sort-date")[0];
@@ -229,6 +240,20 @@ function addSortedButtonTemp() {
     };
 }
 
+function addSortedButtonHum() {
+    var dateSort = document.getElementsByClassName("sort-hum")[0];
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/assets/hum.svg');
+    xhr.send();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var svgContent = xhr.responseText;
+            dateSort.innerHTML = svgContent;
+        }
+    };
+}
+
 export function notResuilt() {
     const grid = document.getElementsByClassName("grid")[0];
 
@@ -253,7 +278,7 @@ export function initialTemp(min, max) {
     maxInput.setAttribute("class", "slider");
     maxInput.setAttribute("id", "tempMax");
     maxInput.setAttribute("value", max);
-    
+
 
     const minInput = document.createElement("input");
     minInput.setAttribute("type", "range");
@@ -267,6 +292,34 @@ export function initialTemp(min, max) {
     minContainer.appendChild(minInput);
 }
 
+export function initialHum(min, max) {
+    changeHumMax(max);
+    changeHumMin(min);
+
+    const maxContainer = document.getElementsByClassName("humInputMax")[0];
+    const minContainer = document.getElementsByClassName("humInputMin")[0];
+
+    const maxInput = document.createElement("input");
+    maxInput.setAttribute("type", "range");
+    maxInput.setAttribute("min", min);
+    maxInput.setAttribute("max", max);
+    maxInput.setAttribute("class", "slider");
+    maxInput.setAttribute("id", "humMax");
+    maxInput.setAttribute("value", max);
+
+
+    const minInput = document.createElement("input");
+    minInput.setAttribute("type", "range");
+    minInput.setAttribute("min", min);
+    minInput.setAttribute("max", max);
+    minInput.setAttribute("class", "slider");
+    minInput.setAttribute("id", "humMin");
+    minInput.setAttribute("value", min);
+
+    maxContainer.appendChild(maxInput);
+    minContainer.appendChild(minInput);
+}
+
 export function changeTempMax(value) {
     const result = document.getElementById("tempMaxResult");
     result.textContent = value;
@@ -274,5 +327,15 @@ export function changeTempMax(value) {
 
 export function changeTempMin(value) {
     const result = document.getElementById("tempMinResult");
+    result.textContent = value;
+}
+
+export function changeHumMax(value) {
+    const result = document.getElementById("humMaxResult");
+    result.textContent = value;
+}
+
+export function changeHumMin(value) {
+    const result = document.getElementById("humMinResult");
     result.textContent = value;
 }

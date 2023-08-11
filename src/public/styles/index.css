@@ -89,7 +89,8 @@ main {
 
 .grid-date-sort,
 .grid-place-sort,
-.grid-temp-sort {
+.grid-temp-sort,
+.grid-hum-sort {
     cursor: pointer;
 }
 
@@ -186,4 +187,16 @@ main {
     display: flex;
     align-items: center;
     gap: 10px;
+}
+
+.grid-one-select {
+    padding: 10px;
+    width: fit-content;
+}
+
+.grid-one-select:hover {
+    background: #4c4c4c;
+    color: white;
+    cursor: pointer;
+    border-radius: 15px;
 }

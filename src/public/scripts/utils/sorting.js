@@ -14,6 +14,34 @@ export function sortedPlaceAsc(weathers) {
     return weathers.sort((x, y) => y.Place.localeCompare(x.Place));
 }
 
+export function sortedHumDes(weathers) {
+    return weathers.sort(function (x, y) {
+        if (x.Humidity < y.Humidity) {
+            return -1;
+        }
+
+        if (x.Humidity > y.Humidity) {
+            return 1;
+        }
+
+        return 0;
+    });
+}
+
+export function sortedHumAsc(weathers) {
+    return weathers.sort(function (x, y) {
+        if (x.Humidity > y.Humidity) {
+            return -1;
+        }
+
+        if (x.Humidity < y.Humidity) {
+            return 1;
+        }
+
+        return 0;
+    });
+}
+
 export function sortedTempDes(weathers) {
     return weathers.sort(function (x, y) {
         if (x.Temperature < y.Temperature) {

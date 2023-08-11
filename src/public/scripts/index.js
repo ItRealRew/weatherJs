@@ -4,6 +4,7 @@ import {
     changeDateControls,
     changePlaceControls,
     changeTempControls,
+    changeHumControls,
     addLoader,
     clearGrid,
     addTotals,
@@ -14,7 +15,10 @@ import {
     paginationDestroy,
     changeTempMax,
     changeTempMin,
-    initialTemp
+    changeHumMax,
+    changeHumMin,
+    initialTemp,
+    initialHum
 } from './controls.js';
 
 import {
@@ -28,7 +32,9 @@ import {
     sortedPlaceAsc,
     sortedPlaceDes,
     sortedTempAsc,
-    sortedTempDes
+    sortedTempDes,
+    sortedHumAsc,
+    sortedHumDes
 } from './utils/sorting.js';
 
 import {
@@ -36,7 +42,8 @@ import {
     filtedByNotClody,
     filtedBySunny,
     filtedByNotSunny,
-    filtedByTemp
+    filtedByTemp,
+    filtedByHum
 } from './utils/filtering.js';
 
 const weathers = new Array();
@@ -68,15 +75,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     addPagination(Math.ceil(weathers.length / pageSize), currentPage);
     addTotals(weathers.length);
 
-    const minTemp = weathers.reduce((min, weather) => {
-        return Math.min(min, weather.Temperature);
-    }, weathers[0].Temperature);
-
-    const maxAge = weathers.reduce((max, weather) => {
-        return Math.max(max, weather.Temperature);
-    }, weathers[0].Temperature);
-
-    initialTemp(minTemp, maxAge);
+    filterInitialization();
 });
 
 document.addEventListener('click', function (event) {
@@ -98,6 +97,12 @@ document.addEventListener('click', function (event) {
         sortTemp();
     }
 
+    if (event.target.classList.contains('sort-hum') ||
+        event.target.classList.contains('sortHum') ||
+        event.target.classList.contains('grid-hum-sort')) {
+        sortHum();
+    }
+
     if (event.target.id === "Clody") {
         filterByClody();
     }
@@ -116,6 +121,10 @@ document.addEventListener('click', function (event) {
 
     if (event.target.id === "TempFilter") {
         filterByTemp();
+    }
+
+    if (event.target.id === "HumFilter") {
+        filterByHum();
     }
 
     if (event.target.classList.contains('grid-filter-reset')) {
@@ -146,10 +155,40 @@ document.addEventListener('input', function (event) {
     if (event.target.id === "tempMin") {
         changeTempMin(event.target.value);
     }
+
+    if (event.target.id === "humMax") {
+        changeHumMax(event.target.value);
+    }
+
+    if (event.target.id === "humMin") {
+        changeHumMin(event.target.value);
+    }
 });
 
 function getWeathers() {
     return filteredWeathers.length === 0 ? weathers : filteredWeathers;
+}
+
+function filterInitialization() {
+    const minTemp = weathers.reduce((min, weather) => {
+        return Math.min(min, weather.Temperature);
+    }, weathers[0].Temperature);
+
+    const maxTemp = weathers.reduce((max, weather) => {
+        return Math.max(max, weather.Temperature);
+    }, weathers[0].Temperature);
+
+    initialTemp(minTemp, maxTemp);
+
+    const minHum = weathers.reduce((min, weather) => {
+        return Math.min(min, weather.Humidity);
+    }, weathers[0].Humidity);
+
+    const maxHum = weathers.reduce((max, weather) => {
+        return Math.max(max, weather.Humidity);
+    }, weathers[0].Humidity);
+
+    initialHum(minHum, maxHum);
 }
 
 function sortDate() {
@@ -189,6 +228,20 @@ function sortTemp() {
     changeTempControls() ?
         sorted = sortedTempDes(getWeathers()) :
         sorted = sortedTempAsc(getWeathers());
+
+    clearGrid();
+    displayDate(sorted);
+}
+
+function sortHum() {
+    clearGrid();
+    addLoader();
+
+    var sorted;
+
+    changeHumControls() ?
+        sorted = sortedHumDes(getWeathers()) :
+        sorted = sortedHumAsc(getWeathers());
 
     clearGrid();
     displayDate(sorted);
@@ -269,12 +322,35 @@ function filterByTemp() {
     toListFilter("Temp", "Температура От " + getMinTemp() + ", До " + getMaxTemp());
 }
 
+function filterByHum() {
+    clearGrid();
+    addLoader();
+
+    currentPage = 1;
+    filteredWeathers = filtedByHum(getWeathers(), getMinHum(), getMaxHum());
+
+    clearGrid();
+    displayDate(filteredWeathers);
+
+    addTotals(filteredWeathers.length);
+
+    toListFilter("Hum", "Влажность От " + getMinHum() + ", До " + getMaxHum());
+}
+
 function getMaxTemp() {
     return document.getElementById("tempMaxResult").textContent;
 }
 
 function getMinTemp() {
     return document.getElementById("tempMinResult").textContent;
+}
+
+function getMaxHum() {
+    return document.getElementById("humMaxResult").textContent;
+}
+
+function getMinHum() {
+    return document.getElementById("humMinResult").textContent;
 }
 
 function resetFilter() {

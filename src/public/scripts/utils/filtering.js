@@ -19,3 +19,9 @@ export function filtedByTemp(weathers, min, max) {
         return weather.Temperature >= min && weather.Temperature <= max;
     });
 }
+
+export function filtedByHum(weathers, min, max) {
+    return weathers.filter(weather => {
+        return weather.Humidity >= min && weather.Humidity <= max;
+    });
+}
