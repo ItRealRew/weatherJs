@@ -90,7 +90,8 @@ main {
 .grid-date-sort,
 .grid-place-sort,
 .grid-temp-sort,
-.grid-hum-sort {
+.grid-hum-sort,
+.grid-wind-sort {
     cursor: pointer;
 }
 
@@ -199,4 +200,17 @@ main {
     color: white;
     cursor: pointer;
     border-radius: 15px;
+}
+
+.grid-data-search {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.header-control {
+    display: flex;
+    gap: 30px;
+    flex-direction: row;
 }

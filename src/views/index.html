@@ -17,7 +17,10 @@
 <body>
   <header>
     <h1>WeatherJs</h1>
-    <a class="transition" href="#Add">Добавить</a>
+    <div class="header-control">
+      <a class="transition" href="#Add">Добавить</a>
+      <div class="transition download-link"></div>
+    </div>
   </header>
 
   <main>
@@ -25,12 +28,25 @@
       <div class="grid-header grid-rows">
         <div class="grid-header-controls grid-date-sort">
           <div class="sort-date"></div>
-          <p class="grid-date-sort">Дата</p>
+          <div class="grid-place-sort grid-header-filter">Дата
+            <div class="grid-filter">
+              <div class="grid-data-search">
+                <div class="grid-filter-row">Дата Старт <input type="date" id="DateStart"></div>
+                <div class="grid-filter-row">Дата Финиш <input type="date" id="DateFinish"></div>
+              </div>
+              <div id="DateSearch" class="grid-filter-elem" style="text-align: center;">Применить</div>
+            </div>
+          </div>
         </div>
         <div>
           <div class="grid-header-controls grid-place-sort">
             <div class="sort-place"></div>
-            <p class="grid-place-sort">Город</p>
+            <div class="grid-place-sort grid-header-filter">Город
+              <div class="grid-filter">
+                <div class="grid-filter-row"><input type="text" id="PlaceSearchStr"></div>
+                <div id="PlaceSearch" class="grid-filter-elem" style="text-align: center;">Применить</div>
+              </div>
+            </div>
           </div>
         </div>
         <div>
@@ -55,13 +71,13 @@
             </div>
           </div>
         </div>
-        <div class="grid-header-filter">Cloud
+        <div class="grid-header-filter">Облачно
           <div class="grid-filter">
             <div id="Clody" class="grid-filter-elem">Облачно</div>
             <div id="NotClody" class="grid-filter-elem">Не облачно</div>
           </div>
         </div>
-        <div class="grid-header-filter">Sunny
+        <div class="grid-header-filter">Солнце
           <div class="grid-filter">
             <div id="Sunny" class="grid-filter-elem">Солнечно</div>
             <div id="NotSunny" class="grid-filter-elem">Пасмурдно</div>
@@ -89,10 +105,34 @@
             </div>
           </div>
         </div>
-        <div>Скорость ветра</div>
-        <div class="grid-one-select">Циклон</div>
-        <div>Антициклон</div>
-        <div>Автор</div>
+        <div class="grid-header-controls grid-wind-sort">
+          <div class="sort-wind"></div>
+          <div class="grid-wind-sort grid-header-filter">Ветер
+            <div class="grid-filter">
+              <div>
+                <div class="grid-filter-row">
+                  <div>Max:</div>
+                  <div id="windMaxResult"></div>
+                </div>
+                <div class="grid-filter-row">
+                  <div>Min:</div>
+                  <div id="windMinResult"></div>
+                </div>
+              </div>
+              <div class="windInputMax"></div>
+              <div class="windInputMin"></div>
+              <div id="WindFilter" class="grid-filter-elem" style="text-align: center;">Применить</div>
+            </div>
+          </div>
+        </div>
+        <div class="grid-one-select" id="SortCyclone">Циклон</div>
+        <div class="grid-one-select" id="SortAntyCyclone">Антициклон</div>
+        <div class="grid-header-filter">Автор
+          <div class="grid-filter">
+            <div class="grid-filter-row"><input type="text" id="AuthorSearchStr"></div>
+            <div id="AuthorSearch" class="grid-filter-elem" style="text-align: center;">Применить</div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="pagination"></div>

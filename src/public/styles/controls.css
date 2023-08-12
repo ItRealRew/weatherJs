@@ -1,21 +1,24 @@
 .sort-date,
 .sort-place,
 .sort-temp,
-.sort-hum {
+.sort-hum,
+.sort-wind {
     width: 25px;
 }
 
 .sort-date svg,
 .sort-place svg,
 .sort-temp svg,
-.sort-hum svg {
+.sort-hum svg,
+.sort-wind svg {
     fill: rgb(0, 0, 0);
 }
 
 .sort-date:hover svg,
 .sort-place:hover svg,
 .sort-temp:hover svg,
-.sort-hum:hover svg {
+.sort-hum:hover svg,
+.sort-wind:hover svg {
     fill: rgb(122, 0, 119);
     cursor: pointer;
     transition: 0.5s;
@@ -88,4 +91,14 @@
     background: rgb(171, 0, 165);
     cursor: pointer;
     border-radius: 10px;
+}
+
+.download-link {
+    width: 45px;
+    fill: rgb(143, 0, 121);
+}
+
+.download-link:hover {
+    fill: rgb(199, 0, 168);
+    cursor: pointer;
 }

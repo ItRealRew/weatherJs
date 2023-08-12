@@ -17,8 +17,12 @@ import {
     changeTempMin,
     changeHumMax,
     changeHumMin,
+    changeWindMax,
+    changeWindMin,
+    changeWindControls,
     initialTemp,
-    initialHum
+    initialHum,
+    initialWind
 } from './controls.js';
 
 import {
@@ -34,7 +38,9 @@ import {
     sortedTempAsc,
     sortedTempDes,
     sortedHumAsc,
-    sortedHumDes
+    sortedHumDes,
+    sortedWindAsc,
+    sortedWindDes
 } from './utils/sorting.js';
 
 import {
@@ -43,7 +49,13 @@ import {
     filtedBySunny,
     filtedByNotSunny,
     filtedByTemp,
-    filtedByHum
+    filtedByHum,
+    filtedByWind,
+    filtedByCyclone,
+    filtedByAntyCyclone,
+    searchByAuthor,
+    searchByPlace,
+    searchByDate
 } from './utils/filtering.js';
 
 const weathers = new Array();
@@ -103,6 +115,12 @@ document.addEventListener('click', function (event) {
         sortHum();
     }
 
+    if (event.target.classList.contains('sort-wind') ||
+        event.target.classList.contains('sortWind') ||
+        event.target.classList.contains('grid-wind-sort')) {
+        sortWind();
+    }
+
     if (event.target.id === "Clody") {
         filterByClody();
     }
@@ -127,12 +145,41 @@ document.addEventListener('click', function (event) {
         filterByHum();
     }
 
+    if (event.target.id === "WindFilter") {
+        filterByWind();
+    }
+
+    if (event.target.id === "SortCyclone") {
+        filterCyclone();
+    }
+
+    if (event.target.id === "SortAntyCyclone") {
+        filterAntyCyclone();
+    }
+
+    if (event.target.id === "AuthorSearch") {
+        filterAuthor();
+    }
+
+    if (event.target.id === "PlaceSearch") {
+        filterPlace();
+    }
+
+    if (event.target.id === "DateSearch") {
+        filterDate();
+    }
+
     if (event.target.classList.contains('grid-filter-reset')) {
         resetFilter();
     }
 
     if (event.target.classList.contains('modal-btn')) {
         addNew();
+    }
+
+    if (event.target.classList.contains('download-link') ||
+        event.target.id === "Download") {
+        downloadData();
     }
 
     const pagination = document.querySelector('.pagination');
@@ -163,6 +210,14 @@ document.addEventListener('input', function (event) {
     if (event.target.id === "humMin") {
         changeHumMin(event.target.value);
     }
+
+    if (event.target.id === "windMax") {
+        changeWindMax(event.target.value);
+    }
+
+    if (event.target.id === "windMin") {
+        changeWindMin(event.target.value);
+    }
 });
 
 function getWeathers() {
@@ -189,6 +244,16 @@ function filterInitialization() {
     }, weathers[0].Humidity);
 
     initialHum(minHum, maxHum);
+
+    const minWind = weathers.reduce((min, weather) => {
+        return Math.min(min, weather.Wind);
+    }, weathers[0].Wind);
+
+    const maxWind = weathers.reduce((max, weather) => {
+        return Math.max(max, weather.Wind);
+    }, weathers[0].Wind);
+
+    initialWind(minWind, maxWind);
 }
 
 function sortDate() {
@@ -242,6 +307,20 @@ function sortHum() {
     changeHumControls() ?
         sorted = sortedHumDes(getWeathers()) :
         sorted = sortedHumAsc(getWeathers());
+
+    clearGrid();
+    displayDate(sorted);
+}
+
+function sortWind() {
+    clearGrid();
+    addLoader();
+
+    var sorted;
+
+    changeWindControls() ?
+        sorted = sortedWindDes(getWeathers()) :
+        sorted = sortedWindAsc(getWeathers());
 
     clearGrid();
     displayDate(sorted);
@@ -337,6 +416,108 @@ function filterByHum() {
     toListFilter("Hum", "Влажность От " + getMinHum() + ", До " + getMaxHum());
 }
 
+function filterByWind() {
+    clearGrid();
+    addLoader();
+
+    currentPage = 1;
+    filteredWeathers = filtedByWind(getWeathers(), getMinWind(), getMaxWind());
+
+    clearGrid();
+    displayDate(filteredWeathers);
+
+    addTotals(filteredWeathers.length);
+
+    toListFilter("Wind", "Скорость ветра От " + getMinWind() + ", До " + getMaxWind());
+}
+
+function filterCyclone() {
+    clearGrid();
+    addLoader();
+
+    currentPage = 1;
+    filteredWeathers = filtedByCyclone(getWeathers());
+
+    clearGrid();
+    displayDate(filteredWeathers);
+
+    addTotals(filteredWeathers.length);
+
+    toListFilter("Cyclone", "Циклон");
+}
+
+function filterAntyCyclone() {
+    clearGrid();
+    addLoader();
+
+    currentPage = 1;
+    filteredWeathers = filtedByAntyCyclone(getWeathers());
+
+    clearGrid();
+    displayDate(filteredWeathers);
+
+    addTotals(filteredWeathers.length);
+
+    toListFilter("AntyCyclone", "Антициклон");
+}
+
+
+function filterAuthor() {
+    clearGrid();
+    addLoader();
+
+    currentPage = 1;
+    const searchString = getAuthorSearchStr();
+
+    filteredWeathers = searchByAuthor(getWeathers(), searchString);
+
+    clearGrid();
+    displayDate(filteredWeathers);
+
+    addTotals(filteredWeathers.length);
+
+    toListFilter("Author", "Автор: " + searchString);
+}
+
+function filterPlace() {
+    clearGrid();
+    addLoader();
+
+    currentPage = 1;
+    const searchString = getPlaceSearchStr();
+
+    filteredWeathers = searchByPlace(getWeathers(), searchString);
+
+    clearGrid();
+    displayDate(filteredWeathers);
+
+    addTotals(filteredWeathers.length);
+
+    toListFilter("Place", "Город: " + searchString);
+}
+
+function filterDate() {
+    clearGrid();
+    addLoader();
+
+    currentPage = 1;
+    let start = getStartDate();
+    let finish = getFinishDate();
+
+    const startDate = start === "" ? (new Date(), start = 'Сегодня') : new Date(start);
+    const finishDate = finish === "" ? (new Date(), finish = 'Сегодня') : new Date(finish);
+
+
+    filteredWeathers = searchByDate(getWeathers(), startDate, finishDate);
+
+    clearGrid();
+    displayDate(filteredWeathers);
+
+    addTotals(filteredWeathers.length);
+
+    toListFilter("Date", "Сортировка по дате: от " + start + ", до " + finish);
+}
+
 function getMaxTemp() {
     return document.getElementById("tempMaxResult").textContent;
 }
@@ -351,6 +532,30 @@ function getMaxHum() {
 
 function getMinHum() {
     return document.getElementById("humMinResult").textContent;
+}
+
+function getMaxWind() {
+    return document.getElementById("windMaxResult").textContent;
+}
+
+function getMinWind() {
+    return document.getElementById("windMinResult").textContent;
+}
+
+function getAuthorSearchStr() {
+    return document.getElementById("AuthorSearchStr").value;
+}
+
+function getPlaceSearchStr() {
+    return document.getElementById("PlaceSearchStr").value;
+}
+
+function getStartDate() {
+    return document.getElementById("DateStart").value;
+}
+
+function getFinishDate() {
+    return document.getElementById("DateFinish").value;
 }
 
 function resetFilter() {
@@ -400,4 +605,15 @@ function addNew() {
 
     newGridElement(weather);
     weathers.push(weather);
+}
+
+function downloadData() {
+    const blob = new Blob([JSON.stringify(getWeathers())], {
+        type: 'application/json'
+    });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'data.json';
+    link.click();
 }

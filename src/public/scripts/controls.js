@@ -3,6 +3,8 @@ export function addControls() {
     addSortedButtonPlace();
     addSortedButtonTemp();
     addSortedButtonHum();
+    addSortedButtonWind()
+    addDownloadLink();
 }
 
 export function newGridElement(weather) {
@@ -20,10 +22,10 @@ export function newGridElement(weather) {
     TemperatureDiv.textContent = weather.Temperature;
 
     const CloudСoverDiv = document.createElement("div");
-    CloudСoverDiv.textContent = weather.Cloud;
+    CloudСoverDiv.textContent = weather.Cloud === true ? "Да": "Нет";
 
     const SunshineDiv = document.createElement("div");
-    SunshineDiv.textContent = weather.Sunshine;
+    SunshineDiv.textContent = weather.Sunshine === true ? "Да": "Нет";
 
     const HumidityDiv = document.createElement("div");
     HumidityDiv.textContent = weather.Humidity;
@@ -32,10 +34,10 @@ export function newGridElement(weather) {
     WindDiv.textContent = weather.Wind;
 
     const CycloneDiv = document.createElement("div");
-    CycloneDiv.textContent = weather.Cyclone;
+    CycloneDiv.textContent = weather.Cyclone === true ? "Да": "Нет";
 
     const AntiCycloneDiv = document.createElement("div");
-    AntiCycloneDiv.textContent = weather.AntiCyclone;
+    AntiCycloneDiv.textContent = weather.AntiCyclone === true ? "Да": "Нет";
 
     const AuthorDiv = document.createElement("div");
     AuthorDiv.textContent = weather.Author;
@@ -197,6 +199,16 @@ export function changeHumControls() {
     return result;
 }
 
+export function changeWindControls() {
+    const value = document.getElementsByClassName("sort-wind")[0];
+
+    let result;
+
+    value.style.getPropertyValue("transform") ? (value.style.transform = "", result = true) :
+        (value.style.transform = "rotate(180deg)", result = false);
+    return result;
+}
+
 
 function addSortedButtonDate() {
     var dateSort = document.getElementsByClassName("sort-date")[0];
@@ -245,6 +257,34 @@ function addSortedButtonHum() {
 
     var xhr = new XMLHttpRequest();
     xhr.open('GET', '/assets/hum.svg');
+    xhr.send();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var svgContent = xhr.responseText;
+            dateSort.innerHTML = svgContent;
+        }
+    };
+}
+
+function addSortedButtonWind() {
+    var dateSort = document.getElementsByClassName("sort-wind")[0];
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/assets/wind.svg');
+    xhr.send();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var svgContent = xhr.responseText;
+            dateSort.innerHTML = svgContent;
+        }
+    };
+}
+
+function addDownloadLink() {
+    var dateSort = document.getElementsByClassName("download-link")[0];
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/assets/upload.svg');
     xhr.send();
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
@@ -320,6 +360,34 @@ export function initialHum(min, max) {
     minContainer.appendChild(minInput);
 }
 
+export function initialWind(min, max) {
+    changeWindMax(max);
+    changeWindMin(min);
+
+    const maxContainer = document.getElementsByClassName("windInputMax")[0];
+    const minContainer = document.getElementsByClassName("windInputMin")[0];
+
+    const maxInput = document.createElement("input");
+    maxInput.setAttribute("type", "range");
+    maxInput.setAttribute("min", min);
+    maxInput.setAttribute("max", max);
+    maxInput.setAttribute("class", "slider");
+    maxInput.setAttribute("id", "windMax");
+    maxInput.setAttribute("value", max);
+
+
+    const minInput = document.createElement("input");
+    minInput.setAttribute("type", "range");
+    minInput.setAttribute("min", min);
+    minInput.setAttribute("max", max);
+    minInput.setAttribute("class", "slider");
+    minInput.setAttribute("id", "windMin");
+    minInput.setAttribute("value", min);
+
+    maxContainer.appendChild(maxInput);
+    minContainer.appendChild(minInput);
+}
+
 export function changeTempMax(value) {
     const result = document.getElementById("tempMaxResult");
     result.textContent = value;
@@ -337,5 +405,15 @@ export function changeHumMax(value) {
 
 export function changeHumMin(value) {
     const result = document.getElementById("humMinResult");
+    result.textContent = value;
+}
+
+export function changeWindMax(value) {
+    const result = document.getElementById("windMaxResult");
+    result.textContent = value;
+}
+
+export function changeWindMin(value) {
+    const result = document.getElementById("windMinResult");
     result.textContent = value;
 }

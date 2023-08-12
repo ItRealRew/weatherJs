@@ -16,11 +16,11 @@ export function sortedPlaceAsc(weathers) {
 
 export function sortedHumDes(weathers) {
     return weathers.sort(function (x, y) {
-        if (x.Humidity < y.Humidity) {
+        if (parseInt(x.Humidity) < parseInt(y.Humidity)) {
             return -1;
         }
 
-        if (x.Humidity > y.Humidity) {
+        if (parseInt(x.Humidity) > parseInt(y.Humidity)) {
             return 1;
         }
 
@@ -30,11 +30,11 @@ export function sortedHumDes(weathers) {
 
 export function sortedHumAsc(weathers) {
     return weathers.sort(function (x, y) {
-        if (x.Humidity > y.Humidity) {
+        if (parseInt(x.Humidity) > parseInt(y.Humidity)) {
             return -1;
         }
 
-        if (x.Humidity < y.Humidity) {
+        if (parseInt(x.Humidity) < parseInt(y.Humidity)) {
             return 1;
         }
 
@@ -44,11 +44,11 @@ export function sortedHumAsc(weathers) {
 
 export function sortedTempDes(weathers) {
     return weathers.sort(function (x, y) {
-        if (x.Temperature < y.Temperature) {
+        if (parseInt(x.Temperature) < parseInt(y.Temperature)) {
             return -1;
         }
 
-        if (x.Temperature > y.Temperature) {
+        if (parseInt(x.Temperature) > parseInt(y.Temperature)) {
             return 1;
         }
 
@@ -58,11 +58,11 @@ export function sortedTempDes(weathers) {
 
 export function sortedTempAsc(weathers) {
     return weathers.sort(function (x, y) {
-        if (x.Temperature > y.Temperature) {
+        if (parseInt(x.Temperature) > parseInt(y.Temperature)) {
             return -1;
         }
 
-        if (x.Temperature < y.Temperature) {
+        if (parseInt(x.Temperature) < parseInt(y.Temperature)) {
             return 1;
         }
 
@@ -70,12 +70,41 @@ export function sortedTempAsc(weathers) {
     });
 }
 
+export function sortedWindDes(weathers) {
+    return weathers.sort(function (x, y) {
+        if (parseInt(x.Wind) < parseInt(y.Wind)) {
+            return -1;
+        }
+
+        if (parseInt(x.Wind) > parseInt(y.Wind)) {
+            return 1;
+        }
+
+        return 0;
+    });
+}
+
+export function sortedWindAsc(weathers) {
+    return weathers.sort(function (x, y) {
+        if (parseInt(x.Wind) > parseInt(y.Wind)) {
+            return -1;
+        }
+
+        if (parseInt(x.Wind) < parseInt(y.Wind)) {
+            return 1;
+        }
+
+        return 0;
+    });
+}
+
+
 function parseDate(date) {
     const dateParts = date.split(/[\/ :]/);
 
     const trueDate = new Date();
     trueDate.setDate(dateParts[0]);
-    trueDate.setMonth(dateParts[1]);
+    trueDate.setMonth(dateParts[1] - 1);
     trueDate.setFullYear(dateParts[2]);
     trueDate.setHours(dateParts[3]);
     trueDate.setMinutes(dateParts[4]);
