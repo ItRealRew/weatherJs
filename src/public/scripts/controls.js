@@ -1,10 +1,10 @@
 export function addControls() {
-    addSortedButtonDate();
-    addSortedButtonPlace();
-    addSortedButtonTemp();
-    addSortedButtonHum();
-    addSortedButtonWind()
-    addDownloadLink();
+    addButton("sort-date", '/assets/sort.svg');
+    addButton("sort-place", '/assets/place.svg');
+    addButton("sort-temp", '/assets/temp.svg');
+    addButton("sort-hum", '/assets/hum.svg');
+    addButton("sort-wind", '/assets/wind.svg');
+    addButton("download-link", '/assets/upload.svg');
 }
 
 export function newGridElement(weather) {
@@ -22,10 +22,10 @@ export function newGridElement(weather) {
     TemperatureDiv.textContent = weather.Temperature;
 
     const CloudСoverDiv = document.createElement("div");
-    CloudСoverDiv.textContent = weather.Cloud === true ? "Да": "Нет";
+    CloudСoverDiv.textContent = weather.Cloud === true ? "Да" : "Нет";
 
     const SunshineDiv = document.createElement("div");
-    SunshineDiv.textContent = weather.Sunshine === true ? "Да": "Нет";
+    SunshineDiv.textContent = weather.Sunshine === true ? "Да" : "Нет";
 
     const HumidityDiv = document.createElement("div");
     HumidityDiv.textContent = weather.Humidity;
@@ -34,10 +34,10 @@ export function newGridElement(weather) {
     WindDiv.textContent = weather.Wind;
 
     const CycloneDiv = document.createElement("div");
-    CycloneDiv.textContent = weather.Cyclone === true ? "Да": "Нет";
+    CycloneDiv.textContent = weather.Cyclone === true ? "Да" : "Нет";
 
     const AntiCycloneDiv = document.createElement("div");
-    AntiCycloneDiv.textContent = weather.AntiCyclone === true ? "Да": "Нет";
+    AntiCycloneDiv.textContent = weather.AntiCyclone === true ? "Да" : "Нет";
 
     const AuthorDiv = document.createElement("div");
     AuthorDiv.textContent = weather.Author;
@@ -159,8 +159,8 @@ export function clearGrid() {
     }
 }
 
-export function changeDateControls() {
-    const value = document.getElementsByClassName("sort-date")[0];
+export function changeSortButton(elemClass) {
+    const value = document.getElementsByClassName(elemClass)[0];
 
     let result;
 
@@ -169,122 +169,11 @@ export function changeDateControls() {
     return result;
 }
 
-export function changePlaceControls() {
-    const value = document.getElementsByClassName("sort-place")[0];
-
-    let result;
-
-    value.style.getPropertyValue("transform") ? (value.style.transform = "", result = true) :
-        (value.style.transform = "rotate(180deg)", result = false);
-    return result;
-}
-
-export function changeTempControls() {
-    const value = document.getElementsByClassName("sort-temp")[0];
-
-    let result;
-
-    value.style.getPropertyValue("transform") ? (value.style.transform = "", result = true) :
-        (value.style.transform = "rotate(180deg)", result = false);
-    return result;
-}
-
-export function changeHumControls() {
-    const value = document.getElementsByClassName("sort-hum")[0];
-
-    let result;
-
-    value.style.getPropertyValue("transform") ? (value.style.transform = "", result = true) :
-        (value.style.transform = "rotate(180deg)", result = false);
-    return result;
-}
-
-export function changeWindControls() {
-    const value = document.getElementsByClassName("sort-wind")[0];
-
-    let result;
-
-    value.style.getPropertyValue("transform") ? (value.style.transform = "", result = true) :
-        (value.style.transform = "rotate(180deg)", result = false);
-    return result;
-}
-
-
-function addSortedButtonDate() {
-    var dateSort = document.getElementsByClassName("sort-date")[0];
+function addButton(elemClass, icon) {
+    var dateSort = document.getElementsByClassName(elemClass)[0];
 
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', '/assets/sort.svg');
-    xhr.send();
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            var svgContent = xhr.responseText;
-            dateSort.innerHTML = svgContent;
-        }
-    };
-}
-
-function addSortedButtonPlace() {
-    var dateSort = document.getElementsByClassName("sort-place")[0];
-
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', '/assets/place.svg');
-    xhr.send();
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            var svgContent = xhr.responseText;
-            dateSort.innerHTML = svgContent;
-        }
-    };
-}
-
-function addSortedButtonTemp() {
-    var dateSort = document.getElementsByClassName("sort-temp")[0];
-
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', '/assets/temp.svg');
-    xhr.send();
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            var svgContent = xhr.responseText;
-            dateSort.innerHTML = svgContent;
-        }
-    };
-}
-
-function addSortedButtonHum() {
-    var dateSort = document.getElementsByClassName("sort-hum")[0];
-
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', '/assets/hum.svg');
-    xhr.send();
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            var svgContent = xhr.responseText;
-            dateSort.innerHTML = svgContent;
-        }
-    };
-}
-
-function addSortedButtonWind() {
-    var dateSort = document.getElementsByClassName("sort-wind")[0];
-
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', '/assets/wind.svg');
-    xhr.send();
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            var svgContent = xhr.responseText;
-            dateSort.innerHTML = svgContent;
-        }
-    };
-}
-
-function addDownloadLink() {
-    var dateSort = document.getElementsByClassName("download-link")[0];
-
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', '/assets/upload.svg');
+    xhr.open('GET', icon);
     xhr.send();
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
@@ -305,8 +194,8 @@ export function notResuilt() {
 }
 
 export function initialTemp(min, max) {
-    changeTempMax(max);
-    changeTempMin(min);
+    changeMax(max, "tempMaxResult");
+    changeMin(min, "tempMinResult");
 
     const maxContainer = document.getElementsByClassName("tempInputMax")[0];
     const minContainer = document.getElementsByClassName("tempInputMin")[0];
@@ -333,8 +222,8 @@ export function initialTemp(min, max) {
 }
 
 export function initialHum(min, max) {
-    changeHumMax(max);
-    changeHumMin(min);
+    changeMax(max, "humMaxResult");
+    changeMin(min, "humMinResult");
 
     const maxContainer = document.getElementsByClassName("humInputMax")[0];
     const minContainer = document.getElementsByClassName("humInputMin")[0];
@@ -361,8 +250,8 @@ export function initialHum(min, max) {
 }
 
 export function initialWind(min, max) {
-    changeWindMax(max);
-    changeWindMin(min);
+    changeMax(max, "windMaxResult");
+    changeMin(min, "windMinResult");
 
     const maxContainer = document.getElementsByClassName("windInputMax")[0];
     const minContainer = document.getElementsByClassName("windInputMin")[0];
@@ -388,32 +277,12 @@ export function initialWind(min, max) {
     minContainer.appendChild(minInput);
 }
 
-export function changeTempMax(value) {
-    const result = document.getElementById("tempMaxResult");
+export function changeMax(value, elemId) {
+    const result = document.getElementById(elemId);
     result.textContent = value;
 }
 
-export function changeTempMin(value) {
-    const result = document.getElementById("tempMinResult");
-    result.textContent = value;
-}
-
-export function changeHumMax(value) {
-    const result = document.getElementById("humMaxResult");
-    result.textContent = value;
-}
-
-export function changeHumMin(value) {
-    const result = document.getElementById("humMinResult");
-    result.textContent = value;
-}
-
-export function changeWindMax(value) {
-    const result = document.getElementById("windMaxResult");
-    result.textContent = value;
-}
-
-export function changeWindMin(value) {
-    const result = document.getElementById("windMinResult");
+export function changeMin(value, elemId) {
+    const result = document.getElementById(elemId);
     result.textContent = value;
 }

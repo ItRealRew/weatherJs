@@ -1,10 +1,6 @@
 import {
     newGridElement,
     addControls,
-    changeDateControls,
-    changePlaceControls,
-    changeTempControls,
-    changeHumControls,
     addLoader,
     clearGrid,
     addTotals,
@@ -13,13 +9,9 @@ import {
     notResuilt,
     addPagination,
     paginationDestroy,
-    changeTempMax,
-    changeTempMin,
-    changeHumMax,
-    changeHumMin,
-    changeWindMax,
-    changeWindMin,
-    changeWindControls,
+    changeMax,
+    changeMin,
+    changeSortButton,
     initialTemp,
     initialHum,
     initialWind
@@ -196,27 +188,27 @@ document.addEventListener('click', function (event) {
 
 document.addEventListener('input', function (event) {
     if (event.target.id === "tempMax") {
-        changeTempMax(event.target.value);
+        changeMax(event.target.value, "tempMaxResult");
     }
 
     if (event.target.id === "tempMin") {
-        changeTempMin(event.target.value);
+        changeMin(event.target.value, "tempMinResult");
     }
 
     if (event.target.id === "humMax") {
-        changeHumMax(event.target.value);
+        changeMax(event.target.value, "humMaxResult");
     }
 
     if (event.target.id === "humMin") {
-        changeHumMin(event.target.value);
+        changeMin(event.target.value, "humMinResult");
     }
 
     if (event.target.id === "windMax") {
-        changeWindMax(event.target.value);
+        changeMax(event.target.value, "windMaxResult");
     }
 
     if (event.target.id === "windMin") {
-        changeWindMin(event.target.value);
+        changeMin(event.target.value, "windMinResult");
     }
 });
 
@@ -262,7 +254,7 @@ function sortDate() {
 
     var sorted;
 
-    changeDateControls() ?
+    changeSortButton("sort-date") ?
         sorted = sortedDateAsc(getWeathers()) :
         sorted = sortedDateDes(getWeathers());
 
@@ -276,7 +268,7 @@ function sortPlace() {
 
     var sorted;
 
-    changePlaceControls() ?
+    changeSortButton("sort-place") ?
         sorted = sortedPlaceDes(getWeathers()) :
         sorted = sortedPlaceAsc(getWeathers());
 
@@ -290,7 +282,7 @@ function sortTemp() {
 
     var sorted;
 
-    changeTempControls() ?
+    changeSortButton("sort-temp") ?
         sorted = sortedTempDes(getWeathers()) :
         sorted = sortedTempAsc(getWeathers());
 
@@ -304,7 +296,7 @@ function sortHum() {
 
     var sorted;
 
-    changeHumControls() ?
+    changeSortButton("sort-hum") ?
         sorted = sortedHumDes(getWeathers()) :
         sorted = sortedHumAsc(getWeathers());
 
@@ -318,7 +310,7 @@ function sortWind() {
 
     var sorted;
 
-    changeWindControls() ?
+    changeSortButton("sort-wind") ?
         sorted = sortedWindDes(getWeathers()) :
         sorted = sortedWindAsc(getWeathers());
 
