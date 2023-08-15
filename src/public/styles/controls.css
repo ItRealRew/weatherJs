@@ -93,12 +93,14 @@
     border-radius: 10px;
 }
 
-.download-link {
+.download-link,
+.chart {
     width: 45px;
     fill: rgb(143, 0, 121);
 }
 
-.download-link:hover {
+.download-link:hover,
+.chart:hover {
     fill: rgb(199, 0, 168);
     cursor: pointer;
 }

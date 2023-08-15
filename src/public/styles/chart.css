@@ -1,0 +1,40 @@
+.chart-container {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    width: 100%;
+    height: 100%;
+    background: white;
+    z-index: 1;
+}
+
+.chart-header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    justify-content: space-between;
+}
+
+.chart-title {
+    font-size: 30px;
+}
+
+.chart-close-btn {
+    background: rgb(143, 0, 121);
+    border-radius: 5px;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    text-transform: capitalize;
+    font-size: 16px;
+    height: fit-content;
+    padding: 10px 21px;
+    text-decoration: none;
+    border: 0;
+}
+
+.chart-close-btn:hover {
+    background-color: rgb(199, 0, 168);
+    border-radius: 10px
+}

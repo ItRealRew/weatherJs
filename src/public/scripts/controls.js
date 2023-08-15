@@ -5,6 +5,7 @@ export function addControls() {
     addButton("sort-hum", '/assets/hum.svg');
     addButton("sort-wind", '/assets/wind.svg');
     addButton("download-link", '/assets/upload.svg');
+    addButton("chart", '/assets/chart.svg');
 }
 
 export function newGridElement(weather) {

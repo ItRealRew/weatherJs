@@ -23,6 +23,10 @@ import {
 } from './requests.js';
 
 import {
+    AddChart
+} from './chart.js';
+
+import {
     sortedDateAsc,
     sortedDateDes,
     sortedPlaceAsc,
@@ -172,6 +176,11 @@ document.addEventListener('click', function (event) {
     if (event.target.classList.contains('download-link') ||
         event.target.id === "Download") {
         downloadData();
+    }
+
+    if (event.target.classList.contains('chart') ||
+        event.target.id === "Chart") {
+        AddChart("тест");
     }
 
     const pagination = document.querySelector('.pagination');

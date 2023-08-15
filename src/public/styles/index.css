@@ -138,11 +138,10 @@ main {
 .grid-filter-list {
     position: absolute;
     top: 50px;
-    left: -150px;
+    left: -160px;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    border-top: 3px solid rgb(199, 0, 168);
     padding-top: 5px;
 }
 
