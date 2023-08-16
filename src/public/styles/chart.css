@@ -1,4 +1,6 @@
 .chart-container {
+    display: flex;
+    flex-direction: column;
     position: absolute;
     top: 0px;
     left: 0px;
@@ -37,4 +39,11 @@
 .chart-close-btn:hover {
     background-color: rgb(199, 0, 168);
     border-radius: 10px
+}
+
+.chart-body {
+    width: calc(100% - 50px);
+    height: calc(100% - 40px);
+    padding: 20px;
+    border: 5px solid rgb(199, 0, 168);
 }

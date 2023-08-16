@@ -1,10 +1,13 @@
 const ChartClassContainer = 'chart-container';
 const HeaderClass = 'chart-header';
+const BodyClass = 'chart-body';
+
 const ChartTitle = 'chart-title';
 const ChartCloseButton = 'chart-close-btn';
 
 let ChartContainer;
 let ChartHeader;
+let ChartBody;
 
 document.addEventListener('click', function (event) {
     if (event.target.classList.contains(ChartCloseButton)) {
@@ -17,6 +20,7 @@ export function AddChart(title) {
     AddChartContainer();
     AddChartHeader();
     AddHeaderContent(title);
+    AddChartBody();
 }
 
 function AddChartContainer() {
@@ -47,6 +51,14 @@ function AddHeaderContent(title) {
 
     ChartHeader.appendChild(titleDiv);
     ChartHeader.appendChild(closeButton);
+}
+
+function AddChartBody() {
+    const div = document.createElement('div');
+    div.classList.add(BodyClass);
+    ChartContainer.appendChild(div);
+
+    ChartHeader = document.getElementsByClassName(ChartBody)[0];
 }
 
 function ChartDestroy() {
