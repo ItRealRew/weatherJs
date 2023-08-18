@@ -42,8 +42,21 @@
 }
 
 .chart-body {
+    display: flex;
+    gap: 20px;
     width: calc(100% - 50px);
     height: calc(100% - 40px);
     padding: 20px;
     border: 5px solid rgb(199, 0, 168);
+    align-items: flex-end;
+    overflow-x: scroll;
+}
+
+.chart-elem-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
 }

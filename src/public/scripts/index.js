@@ -180,7 +180,7 @@ document.addEventListener('click', function (event) {
 
     if (event.target.classList.contains('chart') ||
         event.target.id === "Chart") {
-        AddChart("тест");
+        AddChart("Количество записей в день", getWeathers());
     }
 
     const pagination = document.querySelector('.pagination');
