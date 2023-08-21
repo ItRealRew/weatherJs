@@ -101,8 +101,8 @@ function BuildChart(data) {
         .sort((a, b) => b.count - a.count);
 
     for (let i = 0; i < dateCounts.length; i++) {
-        CreateElem(1, dateCounts[i].count, dateCounts[i].percentage);
-        console.log(dateCounts[i].percentage);
+        const dayMonth = dateCounts[i].date.toLocaleDateString('ru-RU', { day: '2-digit', month: 'long' });
+        CreateElem(dayMonth, dateCounts[i].count, dateCounts[i].percentage);
     }
 }
 

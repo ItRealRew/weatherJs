@@ -1,0 +1,4 @@
+#Weather JS
+
+1. installing NPM packages
+2. Launch by command npx ts-node server.ts
